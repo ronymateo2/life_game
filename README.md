@@ -1,4 +1,23 @@
+# Life Game (Conway's Game of Life)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+
+## Summary
+
+This project implements Conway's Game of Life using React components and is connected to a backend API. The frontend interacts with the `/api/simulate` endpoint to compute the next generation of the grid, ensuring efficient and scalable simulation logic.
+
+### Component Structure
+
+- **GameLife.tsx**: Main component that manages the game state, handles user interactions, and communicates with the API.
+- **Cell.tsx**: Represents individual cells in the grid. Styled using `Cell.module.css`.
+- **ComputeGrid.ts**: Contains utility functions for grid computation.
+- **GameService.ts**: Handles API requests from the frontend to the backend simulation endpoint.
+
+Components are created in the `src/components` directory and are styled using CSS modules for modular and maintainable styles.
+
+## Demo
+
+[Live Demo](https://life-game-nu.vercel.app/) 
 
 ## Getting Started
 

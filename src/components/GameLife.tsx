@@ -29,7 +29,7 @@ export default function GameOfLife() {
     setTimeout(runSimulation, 500);
   }, []);
 
-  const handleAdvanceX = async (steps: number) => {
+  const handleAdvanceSteps = async (steps: number) => {
     let currentGrid = grid;
     currentGrid = await GameService.simulateNext(currentGrid, steps);
     setGrid(currentGrid);
@@ -86,7 +86,7 @@ export default function GameOfLife() {
             }
           }}
         >
-          {running ? "Stop" : "Start"}
+          {running ? "Stop" : "Play Forever"}
         </button>
         <button
           className={styles.button}
@@ -97,7 +97,10 @@ export default function GameOfLife() {
         >
           Next
         </button>
-        <button className={styles.button} onClick={() => handleAdvanceX(10)}>
+        <button
+          className={styles.button}
+          onClick={() => handleAdvanceSteps(10)}
+        >
           Advance 10 Steps
         </button>
         <button
