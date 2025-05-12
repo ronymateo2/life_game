@@ -1,0 +1,40 @@
+/* GameOfLife.module.css */
+.container {
+    padding: 10px;
+    text-align: center;
+    min-height: 100vh;
+    background-color: #000;
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #ffcc00;
+    text-shadow: 0 0 10px #ffcc00;
+  }
+  
+  .grid {
+    display: grid;
+    max-width: 90vw;
+    margin: 20px auto;
+  }
+  
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #ffcc00;
+    color: #000;
+    border: 2px solid #ffcc00;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 0 5px #ffcc00;
+    box-shadow: 0 0 10px #ffcc00;
+  }
+  

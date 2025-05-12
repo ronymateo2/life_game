@@ -1,0 +1,6 @@
+.cell {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 1px solid #00ffff;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
