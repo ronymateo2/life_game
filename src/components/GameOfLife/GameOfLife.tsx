@@ -22,6 +22,13 @@ export default function GameOfLife() {
     gridRef.current = grid;
   }, [grid]);
 
+  // Cleanup on unmount to prevent simulation loop from running after unmount
+  useEffect(() => {
+    return () => {
+      runningRef.current = false;
+    };
+  }, []);
+
   const runSimulation = useCallback(async () => {
     if (!runningRef.current) return;
     const newGrid = await GameService.simulateNext(gridRef.current, 1);
