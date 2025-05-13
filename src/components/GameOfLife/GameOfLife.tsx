@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import styles from "./GameOfLife.module.css";
-import Cell from "./components/Cell";
+import Cell from "../Cell/Cell";
 import {
   generateEmptyGrid,
   getNeighborColors,
@@ -76,6 +76,7 @@ export default function GameOfLife() {
       <div className={styles.controls}>
         <button
           className={styles.button}
+          style={{ minWidth: "130px" }}
           onClick={() => {
             setRunning(!running);
             if (!running) {

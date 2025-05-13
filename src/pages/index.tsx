@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Geist, Geist_Mono } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import GameLife from "@/components/GameLife";
+import { GameOfLife } from "@/components";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +26,7 @@ export default function Home() {
         className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
       >
         <main className={styles.main}>
-          <GameLife></GameLife>
+          <GameOfLife></GameOfLife>
         </main>
       </div>
     </>

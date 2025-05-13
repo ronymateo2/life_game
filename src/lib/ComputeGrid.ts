@@ -51,7 +51,7 @@ export const getNeighborColors = (
 
 export const generateEmptyGrid = (numRows: number, numCols: number): Grid =>
   Array.from({ length: numRows }, () =>
-    Array(numCols).fill({ alive: false, color: null })
+    Array.from({ length: numCols }, () => ({ alive: false, color: null }))
   );
 
 export const simulateGameOfLife = (grid: Grid): Grid => {
@@ -79,7 +79,6 @@ export const simulateGameOfLife = (grid: Grid): Grid => {
       )[0]?.[0];
 
       if (cell.alive && (neighbors < 2 || neighbors > 3)) {
-        debugger;
         return { alive: false, color: null };
       } else if (!cell.alive && neighbors === 3) {
         return { alive: true, color: maxColor || getRandomNeon() };
@@ -93,7 +92,7 @@ export const simulateGameOfLife = (grid: Grid): Grid => {
 export const simulateNext = (grid: Grid, steps: number): Grid => {
   let currentGrid = grid;
   for (let i = 0; i < steps; i++) {
-    currentGrid = simulateGameOfLife(grid);
+    currentGrid = simulateGameOfLife(currentGrid);
   }
   return currentGrid;
 };
