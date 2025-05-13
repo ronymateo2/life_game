@@ -81,6 +81,7 @@ export const simulateGameOfLife = (grid: Grid): Grid => {
         }
       });
 
+      // Determines the color with the highest count from the `colorCounts` object.
       const maxColor = Object.entries(colorCounts).sort(
         (a, b) => b[1] - a[1]
       )[0]?.[0];

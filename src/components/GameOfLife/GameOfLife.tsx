@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import styles from "./GameOfLife.module.css";
 import Cell from "../Cell/Cell";
+import { Error } from "../Error/Error";
 import {
   generateEmptyGrid,
   getNeighborColors,
@@ -13,6 +14,7 @@ export default function GameOfLife() {
   const [numCols, numRows] = [30, 30]; // this currently is hardcoded  but can be changed to be dynamic
   const [grid, setGrid] = useState<Grid>(generateEmptyGrid(numCols, numRows));
   const [running, setRunning] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const runningRef = useRef(running);
   const gridRef = useRef(grid);
 
@@ -29,17 +31,30 @@ export default function GameOfLife() {
     };
   }, []);
 
+  const handleError = (error: Error) => {
+    setError(error.message);
+    setRunning(false);
+    runningRef.current = false;
+  };
+
   const runSimulation = useCallback(async () => {
     if (!runningRef.current) return;
-    const newGrid = await GameService.simulateNext(gridRef.current, 1);
-    setGrid(newGrid);
-    setTimeout(runSimulation, 500);
+    try {
+      const newGrid = await GameService.simulateNext(gridRef.current, 1);
+      setGrid(newGrid);
+      setTimeout(runSimulation, 500);
+    } catch (error) {
+      handleError(error as Error);
+    }
   }, []);
 
   const handleAdvanceSteps = async (steps: number) => {
-    let currentGrid = grid;
-    currentGrid = await GameService.simulateNext(currentGrid, steps);
-    setGrid(currentGrid);
+    try {
+      const currentGrid = await GameService.simulateNext(grid, steps);
+      setGrid(currentGrid);
+    } catch (error) {
+      handleError(error as Error);
+    }
   };
 
   const toggleCell = (i: number, j: number) => {
@@ -63,6 +78,7 @@ export default function GameOfLife() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Conway&apos;s Game of Life</h1>
+      {error && <Error message={error} onDismiss={() => setError(null)} />}
 
       <div
         className={styles.grid}
@@ -99,8 +115,12 @@ export default function GameOfLife() {
         <button
           className={styles.button}
           onClick={async () => {
-            const newGrid = await GameService.simulateNext(grid, 1);
-            setGrid(newGrid);
+            try {
+              const newGrid = await GameService.simulateNext(grid, 1);
+              setGrid(newGrid);
+            } catch (error) {
+              handleError(error as Error);
+            }
           }}
         >
           Next

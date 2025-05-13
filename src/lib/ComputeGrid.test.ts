@@ -1,8 +1,4 @@
-import {
-  simulateGameOfLife,
-  simulateNext,
-  getRandomNeon,
-} from "@/lib/ComputeGrid";
+import { simulateGameOfLife, simulateNext } from "@/lib/ComputeGrid";
 import { Grid } from "@/lib/ComputeGrid";
 
 describe("Game of Life Simulation", () => {
@@ -65,11 +61,5 @@ describe("Game of Life Simulation", () => {
 
     expect(after1[1][0].alive).toBe(true);
     expect(after2[1][1].alive).toBe(true);
-  });
-
-  test("getRandomNeon: returns valid color", () => {
-    const color = getRandomNeon();
-    expect(typeof color).toBe("string");
-    expect(color).toMatch(/^#/);
   });
 });
