@@ -32,6 +32,7 @@ export default function handler(
   const currentGrid = simulateNext(grid, generations);
   return res.status(200).json({ generations, nextGrid: currentGrid });
 }
+
 function isValidGrid(grid: Grid) {
   return (
     Array.isArray(grid) &&

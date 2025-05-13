@@ -1,6 +1,11 @@
-const numRows = 30;
-const numCols = 30;
-const operations = [
+export type Cell = {
+  alive: boolean;
+  color: string | null;
+};
+
+export type Grid = Cell[][];
+
+export const operations = [
   [0, 1],
   [0, -1],
   [1, -1],
@@ -20,13 +25,6 @@ const NEON_COLORS = [
   "#00ffcc",
 ];
 
-export type Cell = {
-  alive: boolean;
-  color: string | null;
-};
-
-export type Grid = Cell[][];
-
 export const getRandomNeon = (): string =>
   NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
 
@@ -34,8 +32,11 @@ export const getNeighborColors = (
   grid: Grid,
   i: number,
   j: number
-): Array<string> => {
+): string[] => {
   const neighborColors = new Set<string>();
+  const numRows = grid.length;
+  const numCols = grid[0].length;
+
   operations.forEach(([x, y]) => {
     const ni = i + x;
     const nj = j + y;
@@ -46,6 +47,7 @@ export const getNeighborColors = (
       }
     }
   });
+
   return [...neighborColors];
 };
 
@@ -55,13 +57,18 @@ export const generateEmptyGrid = (numRows: number, numCols: number): Grid =>
   );
 
 export const simulateGameOfLife = (grid: Grid): Grid => {
+  const numRows = grid.length;
+  const numCols = grid[0].length;
+
   return grid.map((row, i) =>
     row.map((cell, j) => {
       let neighbors = 0;
       const colorCounts: { [color: string]: number } = {};
+
       operations.forEach(([x, y]) => {
         const newI = i + x;
         const newJ = j + y;
+
         if (newI >= 0 && newI < numRows && newJ >= 0 && newJ < numCols) {
           const neighbor = grid[newI][newJ];
           if (neighbor.alive) {
