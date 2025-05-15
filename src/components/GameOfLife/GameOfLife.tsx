@@ -112,17 +112,7 @@ export default function GameOfLife() {
         >
           {running ? "Stop" : "Play Forever"}
         </button>
-        <button
-          className={styles.button}
-          onClick={async () => {
-            try {
-              const newGrid = await GameService.simulateNext(grid, 1);
-              setGrid(newGrid);
-            } catch (error) {
-              handleError(error as Error);
-            }
-          }}
-        >
+        <button className={styles.button} onClick={() => handleAdvanceSteps(1)}>
           Next
         </button>
         <button
